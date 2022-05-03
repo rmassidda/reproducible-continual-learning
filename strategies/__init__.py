@@ -10,3 +10,4 @@ from .lwf import LwF
 from .gss import GSS
 from .iCARL import iCARL
 from .gdumb import GDumb
+from .ags import AGS
