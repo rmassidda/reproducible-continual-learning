@@ -1,9 +1,25 @@
 from types import SimpleNamespace
+import torch
 import strategies
 import os
+import numpy as np
+import random
 from pathlib import Path
 import inspect
 from pandas import read_csv
+
+
+def set_seed(seed):
+    if seed is None:
+        return
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+    if torch.cuda.is_available():
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.enabled = True
+        torch.backends.cudnn.benchmark = False
 
 
 def get_target_result(strat_name: str, bench_name: str):
@@ -58,4 +74,4 @@ def create_default_args(args_dict, additional_args=None):
     return args
 
 
-__all__ = ['get_average_metric', 'create_default_args', 'get_target_result']
+__all__ = ['get_average_metric', 'create_default_args', 'get_target_result', 'set_seed']
